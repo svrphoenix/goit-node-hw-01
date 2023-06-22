@@ -15,13 +15,13 @@ async function listContacts() {
 
 async function getContactById(contactId) {
   const contacts = await listContacts();
-  if (contacts === undefined) return;
+  if (!contacts) return;
   return contacts.find(item => item.id === contactId) || null;
 }
 
 async function removeContact(contactId) {
   const contacts = await listContacts();
-  if (contacts === undefined) return;
+  if (!contacts) return;
   const removedContact = contacts.find(item => item.id === contactId) || null;
   const updatedContacts = contacts.filter(item => item.id !== contactId);
   try {
@@ -34,7 +34,7 @@ async function removeContact(contactId) {
 
 async function addContact(name, email, phone) {
   const contacts = await listContacts();
-  if (contacts === undefined) return;
+  if (!contacts) return;
   const newContact = { id: crypto.randomUUID(), name, email, phone };
   contacts.push(newContact);
   try {
